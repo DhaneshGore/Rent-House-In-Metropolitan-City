@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "predictions": {
+        "House rent Starting from": "15000 INR/Month",
+        "Highest upto Rent": "50000 INR/Month",
+        "Monthly Rent Average": "30000 INR/Month",
+        "Average Bank EMI on Monthly base": "25000 INR/Month"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "cities": [
+        "Bangalore",
+        "Mumbai",
+        "Delhi",
+        "Chennai",
+        "Hyderabad",
+        "Kolkata"
+    ]
+}

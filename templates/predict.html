@@ -10,14 +10,6 @@
 </head>
 
 <body>
-    <!-- Dark Mode Toggle -->
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="slider"></span>
-        </label>
-    </div>
-
     <div class="container">
         <h1>House Rent and EMI Estimator</h1>
 
@@ -69,34 +61,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Dark Mode Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                body.classList.add(savedTheme);
-                themeToggle.checked = savedTheme === 'dark-mode';
-            }
-
-            // Toggle theme on switch
-            themeToggle.addEventListener('change', () => {
-                if (themeToggle.checked) {
-                    body.classList.add('dark-mode');
-                    body.classList.remove('light-mode');
-                    localStorage.setItem('theme', 'dark-mode'); // Save preference
-                } else {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light-mode'); // Save preference
-                }
-            });
-        });
-    </script>
 
     <script>
         $(document).ready(function () {

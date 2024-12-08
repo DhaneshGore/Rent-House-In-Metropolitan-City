@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "bhkOptions": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "floorOptions": [
+        "Ground",
+        "1st Floor",
+        "2nd Floor",
+        "3rd Floor"
+    ]
+}

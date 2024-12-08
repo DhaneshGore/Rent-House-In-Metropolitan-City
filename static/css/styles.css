@@ -1,5 +1,3 @@
-<style>
-
 /* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -226,7 +224,6 @@ button:hover {
     }
 }
 
-
 /* Dark Mode Styles */
 body.dark-mode {
     background-color: #121212;
@@ -286,5 +283,3 @@ body.dark-mode .prediction-item-label {
         grid-template-columns: 1fr;
     }
 }
-
-</style>
