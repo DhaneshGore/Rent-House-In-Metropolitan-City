@@ -1,5 +1,5 @@
 {
-  "build": "h5da7b33_0",
+  "build": "h8ddb27b_0",
   "build_number": 0,
   "channel": "https://repo.anaconda.com/pkgs/main/win-64",
   "constrains": [],
@@ -7,7 +7,7 @@
     "vc >=14.2,<15.0a0",
     "vs2015_runtime >=14.29.30133,<15.0a0"
   ],
-  "extracted_package_dir": "C:\\Users\\Dhanesh\\.conda\\pkgs\\expat-2.6.3-h5da7b33_0",
+  "extracted_package_dir": "D:\\anaconda\\Anaconda\\pkgs\\expat-2.6.4-h8ddb27b_0",
   "files": [
     "Library/bin/expat.dll",
     "Library/bin/libexpat.dll",
@@ -15,10 +15,10 @@
     "Library/include/expat.h",
     "Library/include/expat_config.h",
     "Library/include/expat_external.h",
-    "Library/lib/cmake/expat-2.6.3/expat-config-version.cmake",
-    "Library/lib/cmake/expat-2.6.3/expat-config.cmake",
-    "Library/lib/cmake/expat-2.6.3/expat-release.cmake",
-    "Library/lib/cmake/expat-2.6.3/expat.cmake",
+    "Library/lib/cmake/expat-2.6.4/expat-config-version.cmake",
+    "Library/lib/cmake/expat-2.6.4/expat-config.cmake",
+    "Library/lib/cmake/expat-2.6.4/expat-release.cmake",
+    "Library/lib/cmake/expat-2.6.4/expat.cmake",
     "Library/lib/expat.lib",
     "Library/lib/libexpat.lib",
     "Library/share/doc/expat/AUTHORS",
@@ -26,50 +26,50 @@
     "Library/share/man/man1/xmlwf.1",
     ".nonadmin"
   ],
-  "fn": "expat-2.6.3-h5da7b33_0.conda",
+  "fn": "expat-2.6.4-h8ddb27b_0.conda",
   "license": "MIT",
   "link": {
-    "source": "C:\\Users\\Dhanesh\\.conda\\pkgs\\expat-2.6.3-h5da7b33_0",
+    "source": "D:\\anaconda\\Anaconda\\pkgs\\expat-2.6.4-h8ddb27b_0",
     "type": 1
   },
-  "md5": "0b0d607bdcafa9afa17671242a6deb29",
+  "md5": "4051c708005296ddd0c080d38f4203e1",
   "name": "expat",
-  "package_tarball_full_path": "C:\\Users\\Dhanesh\\.conda\\pkgs\\expat-2.6.3-h5da7b33_0.conda",
+  "package_tarball_full_path": "D:\\anaconda\\Anaconda\\pkgs\\expat-2.6.4-h8ddb27b_0.conda",
   "paths_data": {
     "paths": [
       {
         "_path": "Library/bin/expat.dll",
         "path_type": "hardlink",
-        "sha256": "7a84c43a6b16d1a61e2354fe46c93a2395d9a642c8e63e80cfea9fa9cc2b0fa7",
-        "sha256_in_prefix": "7a84c43a6b16d1a61e2354fe46c93a2395d9a642c8e63e80cfea9fa9cc2b0fa7",
+        "sha256": "2df8277e17ee29149b8f4892cee7fd5d7347ee1dcd64d4ff8a38bfde24b5815d",
+        "sha256_in_prefix": "2df8277e17ee29149b8f4892cee7fd5d7347ee1dcd64d4ff8a38bfde24b5815d",
         "size_in_bytes": 413968
       },
       {
         "_path": "Library/bin/libexpat.dll",
         "path_type": "hardlink",
-        "sha256": "e82bc0776358be497e47eedd079f42dbf3c1fb4afabcb51dd2ab05624580f7b1",
-        "sha256_in_prefix": "e82bc0776358be497e47eedd079f42dbf3c1fb4afabcb51dd2ab05624580f7b1",
-        "size_in_bytes": 413976
+        "sha256": "76c35c72879b156dc4ea86b8c10f08340af580b5003573df36975790decc4acc",
+        "sha256_in_prefix": "76c35c72879b156dc4ea86b8c10f08340af580b5003573df36975790decc4acc",
+        "size_in_bytes": 413968
       },
       {
         "_path": "Library/bin/xmlwf.exe",
         "path_type": "hardlink",
-        "sha256": "399ac5ad876d795c6b92f866c4579564b413e82dec2d03cca3949dacfecb5f30",
-        "sha256_in_prefix": "399ac5ad876d795c6b92f866c4579564b413e82dec2d03cca3949dacfecb5f30",
-        "size_in_bytes": 236824
+        "sha256": "e874a706a6c27719f6159346c9481743b902f43e1fbb1071f8a93856f2b26ed2",
+        "sha256_in_prefix": "e874a706a6c27719f6159346c9481743b902f43e1fbb1071f8a93856f2b26ed2",
+        "size_in_bytes": 236816
       },
       {
         "_path": "Library/include/expat.h",
         "path_type": "hardlink",
-        "sha256": "7bd4e53a8015534b5bbb58afe1a131b3989d3d4fca29bca685c44d34bcaa2555",
-        "sha256_in_prefix": "7bd4e53a8015534b5bbb58afe1a131b3989d3d4fca29bca685c44d34bcaa2555",
-        "size_in_bytes": 44070
+        "sha256": "0f750bc336e510d14ac9a3e63fc2399f60f3f04f0061c426e86751ed5fba90e4",
+        "sha256_in_prefix": "0f750bc336e510d14ac9a3e63fc2399f60f3f04f0061c426e86751ed5fba90e4",
+        "size_in_bytes": 44120
       },
       {
         "_path": "Library/include/expat_config.h",
         "path_type": "hardlink",
-        "sha256": "9cb1395afa36f06a5ad54c3d2c64468d6283977d64092c562b8dad7532d2febf",
-        "sha256_in_prefix": "9cb1395afa36f06a5ad54c3d2c64468d6283977d64092c562b8dad7532d2febf",
+        "sha256": "0f2ca3ac1f0b3c0456b811570c58c99ec766d48d261fb3a637d894b410868802",
+        "sha256_in_prefix": "0f2ca3ac1f0b3c0456b811570c58c99ec766d48d261fb3a637d894b410868802",
         "size_in_bytes": 3493
       },
       {
@@ -80,28 +80,28 @@
         "size_in_bytes": 6029
       },
       {
-        "_path": "Library/lib/cmake/expat-2.6.3/expat-config-version.cmake",
+        "_path": "Library/lib/cmake/expat-2.6.4/expat-config-version.cmake",
         "path_type": "hardlink",
-        "sha256": "27bd3fec677e4adbc3a3ee85b45917d29f8e90fbfe6c506c070ccb0a70c83a02",
-        "sha256_in_prefix": "27bd3fec677e4adbc3a3ee85b45917d29f8e90fbfe6c506c070ccb0a70c83a02",
+        "sha256": "e8359e840b24f89e1db2fc36ea37d411ed13b1aa1d81b88fd176da2458bc5e72",
+        "sha256_in_prefix": "e8359e840b24f89e1db2fc36ea37d411ed13b1aa1d81b88fd176da2458bc5e72",
         "size_in_bytes": 2827
       },
       {
-        "_path": "Library/lib/cmake/expat-2.6.3/expat-config.cmake",
+        "_path": "Library/lib/cmake/expat-2.6.4/expat-config.cmake",
         "path_type": "hardlink",
         "sha256": "275dd795ba90ff99bb31fffd6c495c8037124ab1c80a0edef671d5b6ce02ef89",
         "sha256_in_prefix": "275dd795ba90ff99bb31fffd6c495c8037124ab1c80a0edef671d5b6ce02ef89",
         "size_in_bytes": 3736
       },
       {
-        "_path": "Library/lib/cmake/expat-2.6.3/expat-release.cmake",
+        "_path": "Library/lib/cmake/expat-2.6.4/expat-release.cmake",
         "path_type": "hardlink",
         "sha256": "da895f346e9e2047ea6e83323d21dd7b1ec607567cc0ba7284b053f6e12de165",
         "sha256_in_prefix": "da895f346e9e2047ea6e83323d21dd7b1ec607567cc0ba7284b053f6e12de165",
         "size_in_bytes": 904
       },
       {
-        "_path": "Library/lib/cmake/expat-2.6.3/expat.cmake",
+        "_path": "Library/lib/cmake/expat-2.6.4/expat.cmake",
         "path_type": "hardlink",
         "sha256": "fbbf4735654c7a42349b122d8ee9c459a6c4f59ce09bee38666746fd8e538300",
         "sha256_in_prefix": "fbbf4735654c7a42349b122d8ee9c459a6c4f59ce09bee38666746fd8e538300",
@@ -110,15 +110,15 @@
       {
         "_path": "Library/lib/expat.lib",
         "path_type": "hardlink",
-        "sha256": "db15c578f081eda56f29596a77137b99190c1d63002793bd5ba1c7b0e9ce97b9",
-        "sha256_in_prefix": "db15c578f081eda56f29596a77137b99190c1d63002793bd5ba1c7b0e9ce97b9",
+        "sha256": "826a485843b23987eaca454af09d9e4392d7abf11a9de9057ff1cd03cb16e836",
+        "sha256_in_prefix": "826a485843b23987eaca454af09d9e4392d7abf11a9de9057ff1cd03cb16e836",
         "size_in_bytes": 18206
       },
       {
         "_path": "Library/lib/libexpat.lib",
         "path_type": "hardlink",
-        "sha256": "db15c578f081eda56f29596a77137b99190c1d63002793bd5ba1c7b0e9ce97b9",
-        "sha256_in_prefix": "db15c578f081eda56f29596a77137b99190c1d63002793bd5ba1c7b0e9ce97b9",
+        "sha256": "826a485843b23987eaca454af09d9e4392d7abf11a9de9057ff1cd03cb16e836",
+        "sha256_in_prefix": "826a485843b23987eaca454af09d9e4392d7abf11a9de9057ff1cd03cb16e836",
         "size_in_bytes": 18206
       },
       {
@@ -131,25 +131,25 @@
       {
         "_path": "Library/share/doc/expat/changelog",
         "path_type": "hardlink",
-        "sha256": "6d6424fa0ff5d7b147f6b7d9256b1d2fb0671ebca4b250586ed3fddb8d567133",
-        "sha256_in_prefix": "6d6424fa0ff5d7b147f6b7d9256b1d2fb0671ebca4b250586ed3fddb8d567133",
-        "size_in_bytes": 77698
+        "sha256": "c5f2fcc2ca14d9d0a94dc7c70437926caba348432322a3b9546202e41d8207f5",
+        "sha256_in_prefix": "c5f2fcc2ca14d9d0a94dc7c70437926caba348432322a3b9546202e41d8207f5",
+        "size_in_bytes": 79176
       },
       {
         "_path": "Library/share/man/man1/xmlwf.1",
         "path_type": "hardlink",
-        "sha256": "23e074c685d2a0c9d3e4fbd853244f744067e91e458ba602a29f0675848c70b8",
-        "sha256_in_prefix": "23e074c685d2a0c9d3e4fbd853244f744067e91e458ba602a29f0675848c70b8",
-        "size_in_bytes": 10947
+        "sha256": "5f7a1c4da512c7a031342625f23355a2b1f7007fe1e9196b25e5e3cfcb803953",
+        "sha256_in_prefix": "5f7a1c4da512c7a031342625f23355a2b1f7007fe1e9196b25e5e3cfcb803953",
+        "size_in_bytes": 10946
       }
     ],
     "paths_version": 1
   },
   "requested_spec": "None",
-  "sha256": "ad23f3f7a88f884cdb5ce1c926107077c89fa5154a6cde6596b1c41d5a6e3fb0",
-  "size": 261845,
+  "sha256": "b7462a72d6c5afc096530d38e19d356d48a5ec967aa01f11d53221991256943c",
+  "size": 263015,
   "subdir": "win-64",
-  "timestamp": 1725543405000,
-  "url": "https://repo.anaconda.com/pkgs/main/win-64/expat-2.6.3-h5da7b33_0.conda",
-  "version": "2.6.3"
+  "timestamp": 1733958064000,
+  "url": "https://repo.anaconda.com/pkgs/main/win-64/expat-2.6.4-h8ddb27b_0.conda",
+  "version": "2.6.4"
 }

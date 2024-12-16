@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Property Data Viewer</title>
+    <link rel="stylesheet" href="{{ url_for('search_app.static', filename='css/styles.css') }}">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Rental Property Navigator</h1>
+        </header>
+
+        <section class="filter-section">
+            <form id="filterForm" method="POST">
+                <div class="form-group">
+                    <label for="city">Select City:</label>
+                    <select id="city" name="city" required>
+                        {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bhk">Select BHK:</label>
+                    <select id="bhk" name="bhk" required>
+                        {% for bhk in bhk_options %}
+                        <option value="{{ bhk }}">{{ bhk }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="search-btn">Search Properties</button>
+            </form>
+        </section>
+
+        {% if map_html %}
+        <section class="map-section">
+            <h2>Property Locations</h2>
+            <div id="mapContainer">
+                {{ map_html|safe }}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if data is not none %}
+        <section class="results-section">
+            <h2>Filtered Rental Properties</h2>
+            <div class="table-responsive">
+                <table id="filteredTable">
+                    <thead>
+                        <tr>
+                            <th>Area Locality</th>
+                            <th>City</th>
+                            <th>Rent</th>
+                            <th>BHK</th>
+                            <th>Size</th>
+                            <th>Furnishing</th>
+                            <th>Tenant Preference</th>
+                            <th>Bathrooms</th>
+                            <th>QR Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for _, row in data.iterrows() %}
+                        <tr>
+                            <td>{{ row['Area Locality'] }}</td>
+                            <td>{{ row['City'] }}</td>
+                            <td>{{ row['Rent'] }}</td>
+                            <td>{{ row['BHK'] }}</td>
+                            <td>{{ row['Size'] }}</td>
+                            <td>{{ row['Furnishing Status'] }}</td>
+                            <td>{{ row['Tenant Preferred'] }}</td>
+                            <td>{{ row['Bathroom'] }}</td>
+                            <td>
+                                <img src="data:image/png;base64,{{ row['QR Code'] }}" alt="QR Code" class="qr-code">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const detailsTableBody = document.querySelector("#detailsTable tbody");
+            const filterForm = document.getElementById("filterForm");
+        
+            // Add loading state to form submission
+            filterForm.addEventListener("submit", function (event) {
+                const submitButton = this.querySelector("button");
+                submitButton.innerHTML = "Searching... <span class='loader'>&#9696;</span>";
+                submitButton.disabled = true;
+        
+                // Re-enable button after submission
+                setTimeout(() => {
+                    submitButton.innerHTML = "Search";
+                    submitButton.disabled = false;
+                }, 2000);
+            });
+        
+            window.fetchDetails = async function (rowIdx) {
+                try {
+                    // Add a loading indicator
+                    detailsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="11" style="text-align:center;">
+                                <div class="spinner">Loading details...</div>
+                            </td>
+                        </tr>
+                    `;
+        
+                    const response = await fetch("/get_row", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ row_idx: rowIdx }),
+                    });
+        
+                    if (response.ok) {
+                        const rowData = await response.json();
+        
+                        if (rowData.error) {
+                            console.error("Error from server:", rowData.error);
+                            detailsTableBody.innerHTML = `
+                                <tr>
+                                    <td colspan="11" style="text-align:center; color:red;">
+                                        Error loading details. Please try again.
+                                    </td>
+                                </tr>
+                            `;
+                            return;
+                        }
+        
+                        // Clear existing rows
+                        detailsTableBody.innerHTML = "";
+        
+                        // Add the new row
+                        const row = document.createElement("tr");
+        
+                        const columns = [
+                            "Area Locality",
+                            "City",
+                            "Rent",
+                            "BHK",
+                            "Size",
+                            "Furnishing Status",
+                            "Tenant Preferred",
+                            "Bathroom",
+                            "Latitude",
+                            "Longitude"
+                        ];
+        
+                        columns.forEach((key) => {
+                            const cell = document.createElement("td");
+                            cell.textContent = rowData[key];
+                            row.appendChild(cell);
+                        });
+        
+                        const qrCodeCell = document.createElement("td");
+                        const img = document.createElement("img");
+                        img.src = `data:image/png;base64,${rowData["QR Code"]}`;
+                        img.alt = "QR Code";
+                        img.classList.add("qr-code");
+                        qrCodeCell.appendChild(img);
+                        row.appendChild(qrCodeCell);
+        
+                        detailsTableBody.appendChild(row);
+                    } else {
+                        console.error("Failed to fetch row details:", response.statusText);
+                        detailsTableBody.innerHTML = `
+                            <tr>
+                                <td colspan="11" style="text-align:center; color:red;">
+                                    Network error. Please check your connection and try again.
+                                </td>
+                            </tr>
+                        `;
+                    }
+                } catch (error) {
+                    console.error("Error fetching details:", error);
+                    detailsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="11" style="text-align:center; color:red;">
+                                Unexpected error occurred. Please try again later.
+                            </td>
+                        </tr>
+                    `;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>
