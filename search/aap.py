@@ -14,19 +14,33 @@ search_app = Blueprint(
 )
 
 # Load the dataset
-data_file_path = 'D:/New folder (2)/City Rent/code/data/House_Rent_Dataset.csv'  # Ensure the correct relative path
+data_file_path = 'D:/New folder (2)/City Rent/code/data/House_Rent_Dataset.csv'  # Adjust the path as needed
 data = pd.read_csv(data_file_path)
 
-# Function to generate QR code for location
-def generate_qr_code(lat, lon):
+# Function to generate QR code with property details and Google Maps link
+def generate_qr_code(row):
+    """
+    Generates a QR Code containing property details and a Google Maps link.
+    """
+    property_details = (
+        f"Property Details:\n"
+        f"Area Locality: {row['Area Locality']}\n"
+        f"City: {row['City']}\n"
+        f"Rent: {row['Rent']}\n"
+        f"BHK: {row['BHK']}\n"
+        f"Size: {row['Size']} sq.ft\n"
+        f"Furnishing: {row['Furnishing Status']}\n"
+        f"Tenant Preference: {row['Tenant Preferred']}\n"
+        f"Bathrooms: {row['Bathroom']}\n"
+        f"Map: https://www.google.com/maps?q={row['Latitude']},{row['Longitude']}"
+    )
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,
     )
-    location_url = f"https://www.google.com/maps?q={lat},{lon}"
-    qr.add_data(location_url)
+    qr.add_data(property_details)
     qr.make(fit=True)
     img = qr.make_image(fill='black', back_color='white')
     buffer = BytesIO()
@@ -48,32 +62,32 @@ def index():
     if request.method == 'POST':
         city = request.form.get('city')
         bhk = request.form.get('bhk')
+
+        # Filter data based on user input
         filtered_data = data[
             (data['City'] == city) & (data['BHK'] == int(bhk))
         ]
 
         if not filtered_data.empty:
-            # Generate QR codes for each row
-            filtered_data['QR Code'] = filtered_data.apply(
-                lambda row: generate_qr_code(row['Latitude'], row['Longitude']),
-                axis=1
-            )
+            # Generate QR Codes for filtered properties
+            filtered_data['QR Code'] = filtered_data.apply(generate_qr_code, axis=1)
 
-            # Create a map centered on the filtered data
+            # Create a map centered on the filtered properties
             center_lat = filtered_data['Latitude'].mean()
             center_lon = filtered_data['Longitude'].mean()
             map_object = folium.Map(location=[center_lat, center_lon], zoom_start=12)
 
-            # Add markers for filtered data
+            # Add markers for each property
             for _, row in filtered_data.iterrows():
                 popup_content = f"""
-                <b>Area:</b> {row['Area Locality']}<br>
+                <b>Area Locality:</b> {row['Area Locality']}<br>
                 <b>City:</b> {row['City']}<br>
                 <b>Rent:</b> {row['Rent']}<br>
                 <b>BHK:</b> {row['BHK']}<br>
                 <b>Size:</b> {row['Size']} sq.ft<br>
                 <b>Furnishing:</b> {row['Furnishing Status']}<br>
-                <b>Bathroom:</b> {row['Bathroom']}
+                <b>Bathrooms:</b> {row['Bathroom']}<br>
+                <a href='https://www.google.com/maps?q={row['Latitude']},{row['Longitude']}' target='_blank'>View on Map</a>
                 """
                 popup = Popup(popup_content, max_width=300)
                 folium.Marker(
@@ -81,6 +95,7 @@ def index():
                     popup=popup
                 ).add_to(map_object)
 
+            # Convert map to HTML
             map_html = map_object._repr_html_()
 
     return render_template(
