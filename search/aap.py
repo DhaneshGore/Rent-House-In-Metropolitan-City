@@ -70,7 +70,7 @@ def index():
 
         if not filtered_data.empty:
             # Generate QR Codes for filtered properties
-            filtered_data['QR Code'] = filtered_data.apply(generate_qr_code, axis=1)
+            filtered_data.loc[:, 'QR Code'] = filtered_data.apply(generate_qr_code, axis=1)
 
             # Create a map centered on the filtered properties
             center_lat = filtered_data['Latitude'].mean()

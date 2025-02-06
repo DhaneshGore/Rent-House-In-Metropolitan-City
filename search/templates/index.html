@@ -9,11 +9,6 @@
 </head>
 
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" aria-label="Toggle Theme">
-        <span class="theme-icon">☀️</span>
-    </button>
-
     <div class="container">
         <header>
             <h1>Rental Property Navigator</h1>
@@ -23,7 +18,7 @@
         <section class="filter-section">
             <form id="filterForm" method="POST">
                 <div class="form-group">
-                    <label for="city">Select City:</label>
+                    <label for="city">🌆 Select City:</label>
                     <select id="city" name="city" required>
                         {% for city in cities %}
                         <option value="{{ city }}">{{ city }}</option>
@@ -32,7 +27,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="bhk">Select BHK:</label>
+                    <label for="bhk">🛏️ Select BHK:</label>
                     <select id="bhk" name="bhk" required>
                         {% for bhk in bhk_options %}
                         <option value="{{ bhk }}">{{ bhk }}</option>
@@ -40,14 +35,14 @@
                     </select>
                 </div>
 
-                <button type="submit">Search Properties</button>
+                <button type="submit">🔍 Search Properties</button>
             </form>
         </section>
 
         <!-- Map Section -->
         {% if map_html %}
         <section class="map-section">
-            <h2>Property Locations</h2>
+            <h2>📍 Property Locations</h2>
             <div id="mapContainer">
                 {{ map_html|safe }}
             </div>
@@ -57,21 +52,21 @@
         <!-- Results Table -->
         {% if data is not none %}
         <section class="results-section">
-            <h2>Filtered Rental Properties</h2>
+            <h2>🏠 Filtered Rental Properties</h2>
             <div class="table-responsive">
                 <table id="filteredTable">
                     <thead>
                         <tr>
-                            <th>Area Locality</th>
-                            <th>City</th>
-                            <th>Rent</th>
-                            <th>BHK</th>
-                            <th>Size (sq.ft)</th>
-                            <th>Furnishing</th>
-                            <th>Tenant Preference</th>
-                            <th>Bathrooms</th>
-                            <th>QR Code</th>
-                            <th>Map</th>
+                            <th>📍 Area Locality</th>
+                            <th>🌆 City</th>
+                            <th>💰 Rent</th>
+                            <th>🛏️ BHK</th>
+                            <th>📐 Size (sq.ft)</th>
+                            <th>🛋️ Furnishing</th>
+                            <th>👤 Tenant Preference</th>
+                            <th>🚿 Bathrooms</th>
+                            <th>🔍 QR Code</th>
+                            <th>🗺️ Map</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,7 +85,7 @@
                             </td>
                             <td>
                                 <a href="https://www.google.com/maps?q={{ row['Latitude'] }},{{ row['Longitude'] }}" target="_blank">
-                                    <button class="map-btn">View on Map</button>
+                                    <button class="map-btn">🗺️ View on Map</button>
                                 </a>
                             </td>
                         </tr>
@@ -101,58 +96,6 @@
         </section>
         {% endif %}
     </div>
-
-    <!-- Loading State Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.querySelector('.theme-toggle');
-            const themeIcon = themeToggle.querySelector('.theme-icon');
-            
-            // Check for saved theme preference or system preference
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        
-            function setTheme(theme) {
-                if (theme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    themeIcon.textContent = '🌙';
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    themeIcon.textContent = '☀️';
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-        
-            // Initial theme setup
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else if (systemPrefersDark.matches) {
-                setTheme('dark');
-            }
-        
-            // Theme toggle event listener
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-                setTheme(currentTheme === 'light' ? 'dark' : 'light');
-            });
-        
-            // Listen for system theme changes
-            systemPrefersDark.addListener((e) => {
-                setTheme(e.matches ? 'dark' : 'light');
-            });
-        });
-        document.getElementById("filterForm").addEventListener("submit", function () {
-            const submitButton = this.querySelector("button");
-            submitButton.innerHTML = "Searching...";
-            submitButton.disabled = true;
-
-            setTimeout(() => {
-                submitButton.innerHTML = "Search Properties";
-                submitButton.disabled = false;
-            }, 3000);
-        });
-    </script>
 </body>
 
 </html>

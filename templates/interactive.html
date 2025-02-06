@@ -7,7 +7,6 @@
     <title>House Rent Prediction</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
 </head>
 
 <body>
@@ -60,6 +59,9 @@
 
         <!-- Address Map -->
         <div id="map"></div>
+
+        <!-- Go to Search Page Button -->
+        <button class="btn" onclick="window.location.href='/search/'">🔍 Search Address</button>
     </div>
 
     <script>

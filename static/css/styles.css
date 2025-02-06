@@ -196,6 +196,24 @@ button:hover {
     text-align: center;
 }
 
+/* Go to Search Button Styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
 
 /* Dark Mode Styles */
 body.dark-mode {
