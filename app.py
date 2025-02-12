@@ -47,6 +47,12 @@ with open(os.path.join(MODEL_DIR, 'feature_columns.pkl'), 'rb') as f:
 # -----------------------------------------------------------------------------
 # Load the House Rent Dataset (for prediction and map rendering)
 # -----------------------------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, 'data')
+data_file_path = os.path.join(DATA_DIR, 'House_Rent_Dataset.csv')
+
+# Load the House Rent Dataset (for prediction and map rendering)
+data = pd.read_csv(data_file_path)
 data = pd.read_csv(os.path.join(DATA_DIR, 'House_Rent_Dataset.csv'))
 
 # -----------------------------------------------------------------------------
