@@ -5,6 +5,7 @@ from folium import Popup
 import qrcode
 from io import BytesIO
 import base64
+import os
 
 # Define the blueprint for the search app
 search_app = Blueprint(
@@ -14,8 +15,15 @@ search_app = Blueprint(
 )
 
 # Load the dataset
-data_file_path = 'D:/New folder (2)/City Rent/code/data/House_Rent_Dataset.csv'  # Adjust the path as needed
-data = pd.read_csv(data_file_path)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get the base directory
+DATA_DIR = os.path.join(BASE_DIR, "..", "data")  # Move up one level to access the data folder
+data_file_path = os.path.join(DATA_DIR, "House_Rent_Dataset.csv")  # Create the full path
+
+# Load dataset safely
+if os.path.exists(data_file_path):
+    data = pd.read_csv(data_file_path)
+else:
+    raise FileNotFoundError(f"Dataset not found: {data_file_path}")
 
 # Function to generate QR code with property details and Google Maps link
 def generate_qr_code(row):
