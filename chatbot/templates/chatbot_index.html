@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏡 Real Estate Chatbot</title>
+    <!-- Reference the chatbot blueprint’s static folder -->
+    <link rel="stylesheet" href="{{ url_for('chatbot_bp.static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>🏡 Real Estate Chatbot</h1>
+        <div id="chat-container">
+            <div class="message bot">🤖 Hello! How can I help you find a property today?</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Ask about properties..." autofocus>
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <!-- Reference the chatbot blueprint’s static folder -->
+    <script src="{{ url_for('chatbot_bp.static', filename='chatbot.js') }}"></script>
+</body>
+</html>

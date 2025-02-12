@@ -3,20 +3,35 @@ import pandas as pd
 import pickle
 import os
 import folium
-from search.aap import search_app  # Import the blueprint from the search app
 
-# Initialize Flask app
+# Import the Search blueprint
+from search.aap import search_app
+
+# Import the Chatbot blueprint (make sure you created chatbot_blueprint.py in the chatbot folder)
+from chatbot.chatbot_blueprint import chatbot_bp
+
+# Initialize the Flask app
 app = Flask(__name__)
 
-# Register the search app's blueprint
+# -----------------------------------------------------------------------------
+# Register Blueprints
+# -----------------------------------------------------------------------------
+# Search App: accessible at http://localhost:5000/search/
 app.register_blueprint(search_app, url_prefix='/search')
 
-# Paths
+# Chatbot: accessible at http://localhost:5000/chatbot/
+app.register_blueprint(chatbot_bp, url_prefix='/chatbot')
+
+# -----------------------------------------------------------------------------
+# Paths for Models and Data
+# -----------------------------------------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, 'models')
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
-# Load pre-trained models
+# -----------------------------------------------------------------------------
+# Load Pre-trained Models and Feature Columns
+# -----------------------------------------------------------------------------
 with open(os.path.join(MODEL_DIR, 'rf_model.pkl'), 'rb') as f:
     rf_model = pickle.load(f)
 
@@ -26,19 +41,25 @@ with open(os.path.join(MODEL_DIR, 'lgb_model.pkl'), 'rb') as f:
 with open(os.path.join(MODEL_DIR, 'xgb_model.pkl'), 'rb') as f:
     xgb_model = pickle.load(f)
 
-# Load feature columns used during training
 with open(os.path.join(MODEL_DIR, 'feature_columns.pkl'), 'rb') as f:
     feature_columns = pickle.load(f)
 
-# Load the dataset for map rendering
+# -----------------------------------------------------------------------------
+# Load the House Rent Dataset (for prediction and map rendering)
+# -----------------------------------------------------------------------------
 data = pd.read_csv(os.path.join(DATA_DIR, 'House_Rent_Dataset.csv'))
 
+# -----------------------------------------------------------------------------
+# Routes for the Main Application
+# -----------------------------------------------------------------------------
 @app.route('/')
 def main_home():
     """
-    Render the home page for the main application.
+    Render the interactive prediction page.
+    Accessible at http://localhost:5000/
     """
     return render_template('interactive.html')
+
 
 @app.route('/get_cities', methods=['GET'])
 def get_cities():
@@ -55,7 +76,7 @@ def get_cities():
 @app.route('/get_city_details', methods=['GET'])
 def get_city_details():
     """
-    Return available BHK, floor, and area types for the selected city.
+    Return available BHK, Floor, and Area Type options for the selected city.
     """
     try:
         city = request.args.get('city')
@@ -81,19 +102,19 @@ def get_city_details():
 @app.route('/predict', methods=['POST'])
 def predict():
     """
-    Handle prediction requests and return yearly and monthly rent.
+    Process prediction requests.
     """
     try:
-        # Extract input data from the form
+        # Extract input data from the POSTed JSON
         form_data = request.json
 
-        # Extract numeric floor value (e.g., '2 out of 7' -> 2)
-        floor_value = form_data['Floor'].split()[0]  # Get the first part before 'out'
+        # Extract the numeric part of the floor (e.g., "2 out of 7")
+        floor_value = form_data['Floor'].split()[0]
 
-        # Build input data for prediction
+        # Build the input dictionary (using one-hot encoding for Area Type and City)
         input_data = {
             'BHK': int(form_data['BHK']),
-            'Floor': int(floor_value),  # Convert the numeric part to an integer
+            'Floor': int(floor_value),
             'Area Type_Carpet Area': 0,
             'Area Type_Super Area': 0,
             'City_Chennai': 0,
@@ -103,12 +124,10 @@ def predict():
             'City_Mumbai': 0,
             'City_Bangalore': 0
         }
-
-        # Handle one-hot encoding for Area Type and City
         input_data[f"Area Type_{form_data['Area Type']}"] = 1
         input_data[f"City_{form_data['City']}"] = 1
 
-        # Create a DataFrame from the input data and align it with feature columns
+        # Create a DataFrame and align with the training feature columns
         feature_df = pd.DataFrame([input_data], columns=feature_columns).fillna(0)
 
         # Perform predictions using the loaded models
@@ -117,11 +136,10 @@ def predict():
         prediction_xgb = xgb_model.predict(feature_df)[0]
         avg_prediction = (prediction_rf + prediction_lgb + prediction_xgb) / 3
 
-        # Calculate yearly and monthly rents
-        yearly_rent = (prediction_rf + prediction_xgb) / 12
-        monthly_rent = yearly_rent
+        # Calculate monthly rent (example calculation)
+        monthly_rent = (prediction_rf + prediction_xgb) / 12
 
-        # Return predictions as a JSON response
+        # Return the predictions as a JSON response
         return jsonify({
             "success": True,
             "predictions": {
@@ -140,7 +158,7 @@ def predict():
 @app.route('/get_map', methods=['POST'])
 def get_map():
     """
-    Generate a map based on the selected city and return it.
+    Generate and return an HTML representation of a map based on the selected city.
     """
     try:
         city = request.json.get('City')
@@ -149,14 +167,14 @@ def get_map():
         if city_data.empty:
             return jsonify({"success": False, "error": "No data available for the selected city."})
 
-        # Get the center coordinates for the city
+        # Determine center coordinates for the city
         city_lat = city_data['Latitude'].mean()
         city_lon = city_data['Longitude'].mean()
 
         # Create a Folium map
         city_map = folium.Map(location=[city_lat, city_lon], zoom_start=12)
 
-        # Add markers for each property
+        # Add markers for each property in the city
         for _, row in city_data.iterrows():
             folium.Marker(
                 location=[row['Latitude'], row['Longitude']],
@@ -165,10 +183,12 @@ def get_map():
 
         # Return the map as HTML
         return jsonify({"success": True, "map": city_map._repr_html_()})
-
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
 
+# -----------------------------------------------------------------------------
+# Run the Unified Application
+# -----------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)

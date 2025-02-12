@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-
 <body>
     <div class="container">
         <!-- Theme Toggle -->
@@ -60,8 +58,9 @@
         <!-- Address Map -->
         <div id="map"></div>
 
-        <!-- Go to Search Page Button -->
+        <!-- Navigation Buttons -->
         <button class="btn" onclick="window.location.href='/search/'">🔍 Search Address</button>
+        <button class="btn" onclick="window.location.href='/chatbot/'">🤖 Chat with Chatbot</button>
     </div>
 
     <script>
@@ -127,7 +126,6 @@
             // Function to update prediction results
             function updatePredictionResults(response) {
                 const resultsContainer = document.getElementById('results');
-
                 resultsContainer.innerHTML = `
                     <div class="prediction-grid">
                         <div class="prediction-column">
@@ -210,5 +208,4 @@
         });
     </script>
 </body>
-
 </html>

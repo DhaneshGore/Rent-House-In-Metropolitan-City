@@ -1,0 +1,68 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* Chat container */
+.chat-container {
+    width: 40%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat box for messages */
+#chat-box {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+}
+
+/* User message styling */
+.user-message {
+    text-align: right;
+    color: blue;
+    background: #dbeafe;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Bot message styling */
+.bot-message {
+    text-align: left;
+    color: green;
+    background: #e9fbe9;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Input field and button styling */
+input,
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
