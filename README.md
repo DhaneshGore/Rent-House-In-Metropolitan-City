@@ -137,7 +137,7 @@ For questions or feedback, please contact:
 
 Dhanesh Gore
 
-Email: your.email@example.com
+Email: dhaneshgore1@gmail.com
 
 LinkedIn: Your LinkedIn Profile
 
